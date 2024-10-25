@@ -49,8 +49,8 @@
         }
 
         .about img {
-            width: 150px;
-            height: 150px;
+            width: 250px;
+            height: 250px;
             object-fit: cover;
             border-radius: 50%;
             margin-bottom: 20px;
@@ -84,6 +84,15 @@
             color: white;
             text-decoration: underline;
         }
+
+        .services .card img {
+            width: 100%;
+            /* S'adapte à la largeur du conteneur */
+            height: 250px;
+            /* Hauteur fixe pour toutes les images */
+            object-fit: cover;
+            /* Coupe ou redimensionne l'image pour remplir le cadre tout en conservant les proportions */
+        }
     </style>
 </head>
 
@@ -93,7 +102,8 @@
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
             <a class="navbar-brand" href="#">Portfolio</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -121,7 +131,8 @@
                 <div class="col-md-4 text-center">
                     <img src="sary.jpg" alt="Profile Image">
                     <h3>Ratsiandavana Mandranto Fitahiana</h3>
-                    <p>Student at ENI - Curious, motivated, and passionate about modern technologies, always in continuous learning to develop innovative solutions.</p>
+                    <p>Student at ENI - Curious, motivated, and passionate about modern technologies, always in
+                        continuous learning to develop innovative solutions.</p>
                 </div>
             </div>
         </div>
@@ -132,13 +143,21 @@
         <div class="container">
             <h2>Skills</h2>
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-3">
                     <h4>Development</h4>
-                    <p>Microservices, APIs, Python, JavaScript, React, Git</p>
+                    <p>Microservices, JavaScript , Python, .NET , Java </p>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-3">
                     <h4>Infrastructure</h4>
-                    <p>AWS (EC2, RDS), Docker, Network Protocols</p>
+                    <p>AWS , Terraform , Docker , Kubernetes , Network Protocols </p>
+                </div>
+                <div class="col-md-3">
+                    <h4>Version control and delivery Tools</h4>
+                    <p>Git / GitHub , Jenkins , Secure Shell</p>
+                </div>
+                <div class="col-md-3">
+                    <h4>OS</h4>
+                    <p>Linux Debian Based , Windows</p>
                 </div>
             </div>
         </div>
@@ -149,13 +168,26 @@
         <div class="container">
             <h2>Projects</h2>
             <ul>
-                <li><strong>Management App: </strong>Developed a custom management app for client needs.</li>
-                <li><strong>Microservices Deployment: </strong>Implemented microservices architecture for web, desktop, and mobile apps.</li>
-                <li><strong>Static Web Apps: </strong>Deployed on GitHub Pages.</li>
+                <li><strong>High Availability (HA) Database and Web Infrastructure:</strong> Engineered a
+                    high-availability setup on Ubuntu Server featuring a master-slave database architecture and
+                    load-balanced web servers. Configured replication and failover mechanisms to ensure continuous
+                    database synchronization and quick recovery in case of failure. The HA architecture maximizes uptime
+                    and reliability for both database and web services, enhancing fault tolerance and system resilience.
+                </li>
+                <li><strong>Microservices Deployment:</strong> Designed and implemented a microservices architecture for
+                    web, desktop, and mobile applications, using Docker containers for isolated, consistent deployments
+                    across platforms.</li>
+                <li><strong>Continuous Integration/Continuous Deployment (CI/CD):</strong> Set up a CI/CD pipeline with
+                    Jenkins to automate testing, integration, and deployment, reducing delivery time and enhancing code
+                    quality.</li>
+                <li><strong>Static Web Applications:</strong> Created and deployed static websites on GitHub Pages,
+                    focusing on front-end performance optimization and responsive design.</li>
+                <li><strong>Container Orchestration:</strong> Utilized Docker Compose and Kubernetes for container
+                    orchestration, enabling scalable, resilient application deployments with automated resource
+                    management.</li>
             </ul>
         </div>
     </section>
-
     <!-- Services Section -->
     <section id="services" class="services bg-light">
         <div class="container">
@@ -163,18 +195,21 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="card">
-                        <h4>Web Development</h4>
-                        <p>Building responsive, high-performing websites.</p>
+                        <img src="UIUX.png" alt="Mobile Apps" class="img-fluid mb-3">
+                        <h4>Frontend Development</h4>
+                        <p>Building high-performing User Interface</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="card">
-                        <h4>Mobile Apps</h4>
-                        <p>Developing cross-platform mobile applications.</p>
+                        <img src="microservice.jpeg" alt="Mobile Apps" class="img-fluid mb-3">
+                        <h4>Multi-platform App</h4>
+                        <p>Developing Multi-platform and Microservice applications </p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="card">
+                        <img src="CloudComputing.jpeg" alt="Mobile Apps" class="img-fluid mb-3">
                         <h4>Cloud Services</h4>
                         <p>Deploying and managing services on AWS.</p>
                     </div>
