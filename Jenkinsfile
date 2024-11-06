@@ -5,7 +5,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Récupérer le code depuis le dépôt
-                git 'https://github.com/mandrantofit/potfolio.git' // Remplacez par l'URL de votre dépôt
+                git 'https://github.com/mandrantofit/portfolio.git' // Remplacez par l'URL de votre dépôt
             }
         }
 
@@ -43,7 +43,7 @@ pipeline {
             steps {
                 // Exemple de monitoring avec ping ou vérification de statut
                 echo 'Monitoring deployed application...'
-                sh 'curl -I http://your-deployed-site.com || echo "Deployment check failed."'
+                sh 'curl -I https://mandrantofit.github.io/portfolio/main.html || echo "Deployment check failed."'
             }
         }
     }
