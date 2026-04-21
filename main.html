@@ -5,93 +5,386 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio - Ratsiandavana Mandranto Fitahiana</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
+        :root {
+            --primary: #17a2b8;
+            --primary-soft: #3dc3df;
+            --bg: #f5fbff;
+            --surface: rgba(255, 255, 255, 0.92);
+            --text: #1f3040;
+            --muted: #5e6d7a;
+            --shadow: 0 24px 80px rgba(31, 48, 64, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
-            color: #333;
+            font-family: 'Inter', Arial, sans-serif;
+            background: linear-gradient(180deg, #eef8ff 0%, #fdfefe 52%, #ffffff 100%);
+            color: var(--text);
             scroll-behavior: smooth;
+            min-height: 100vh;
+        }
+
+        body::before,
+        body::after {
+            content: "";
+            position: fixed;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        body::before {
+            top: -120px;
+            left: -120px;
+            width: 320px;
+            height: 320px;
+            background: radial-gradient(circle, rgba(23, 162, 184, 0.28), transparent 62%);
+        }
+
+        body::after {
+            bottom: -100px;
+            right: -100px;
+            width: 260px;
+            height: 260px;
+            background: radial-gradient(circle, rgba(61, 195, 223, 0.22), transparent 62%);
         }
 
         .navbar {
-            background-color: #17a2b8;
+            background: rgba(23, 162, 184, 0.95);
+            backdrop-filter: saturate(180%) blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.18);
         }
 
-        .navbar a {
+        .navbar-brand,
+        .navbar-nav .nav-link {
             color: white !important;
-            font-weight: bold;
+            font-weight: 600;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #eafcff !important;
         }
 
         .header {
-            background-color: #17a2b8;
+            background: linear-gradient(135deg, #17a2b8, #3db9d7);
             color: white;
-            padding: 50px 0;
+            padding: 80px 0 60px;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
+            box-shadow: var(--shadow);
+        }
+
+        .header::after {
+            content: "";
+            position: absolute;
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.12);
+            top: 20px;
+            right: -80px;
         }
 
         .header h1 {
-            font-size: 3em;
+            font-size: clamp(2.5rem, 4vw, 3.4rem);
+            letter-spacing: 0.02em;
+            margin-bottom: 16px;
         }
 
         .header p {
-            font-size: 1.2em;
+            font-size: 1.1rem;
+            max-width: 760px;
+            margin: 0 auto;
+            line-height: 1.7;
         }
 
         section {
-            padding: 60px 0;
+            padding: 70px 0;
+        }
+
+        section .section-card {
+            background: var(--surface);
+            border-radius: 26px;
+            box-shadow: var(--shadow);
+            padding: 40px 30px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.7);
         }
 
         section h2 {
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             text-align: center;
+            font-weight: 700;
+            letter-spacing: 0.03em;
+            position: relative;
+        }
+
+        section h2::after {
+            content: "";
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--primary);
+            margin: 18px auto 0;
+            border-radius: 999px;
         }
 
         .about img {
-            width: 250px;
-            height: 250px;
+            width: 240px;
+            height: 240px;
             object-fit: cover;
-            border-radius: 50%;
+            border-radius: 24px;
             margin-bottom: 20px;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            box-shadow: 0 24px 70px rgba(23, 162, 184, 0.16);
+        }
+
+        .about img:hover {
+            transform: translateY(-6px);
         }
 
         .about-text {
             text-align: center;
         }
 
-        .services .card {
-            margin: 15px;
-            padding: 20px;
-            text-align: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: 0.3s;
+        .about-text p {
+            max-width: 760px;
+            margin: 0 auto;
+            color: var(--muted);
+            line-height: 1.85;
         }
 
-        .services .card:hover {
-            transform: scale(1.05);
+        .skills .row > div,
+        .projects .project-list li,
+        .services .service-card,
+        .contact .contact-card {
+            transition: transform 0.35s ease, box-shadow 0.35s ease, background 0.35s ease;
+        }
+
+        .skills .row > div {
+            padding: 18px;
+        }
+
+        .skills h4 {
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+
+        .skills p,
+        .projects .project-list li,
+        .services p,
+        .contact p {
+            color: var(--muted);
+            line-height: 1.8;
+        }
+
+        .project-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .project-list li {
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(31, 48, 64, 0.08);
+        }
+
+        .project-list li:last-child {
+            border-bottom: none;
+        }
+
+        .project-list strong {
+            color: var(--text);
+        }
+
+        .services .service-card {
+            margin: 15px 0;
+            padding: 28px 22px;
+            border-radius: 22px;
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 22px 60px rgba(15, 23, 42, 0.08);
+            text-align: center;
+            min-height: 360px;
+        }
+
+        .services .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 30px 80px rgba(15, 23, 42, 0.12);
+        }
+
+        .services .service-card img {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+            border-radius: 18px;
+            margin-bottom: 22px;
+        }
+
+        .services .service-card h4 {
+            margin-bottom: 14px;
+            font-size: 1.3rem;
+        }
+
+        .btn-info {
+            background: linear-gradient(135deg, #26c8e3, #0f91ab);
+            border: none;
+            box-shadow: 0 18px 45px rgba(15, 23, 42, 0.12);
+        }
+
+        .btn-info:hover {
+            background: linear-gradient(135deg, #37d5ee, #10a5c0);
+        }
+
+        .contact-card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 34px 30px;
+            border-radius: 24px;
+            box-shadow: 0 24px 70px rgba(15, 23, 42, 0.08);
+            text-align: center;
+        }
+
+        .contact-card i {
+            color: var(--primary);
+            margin-right: 8px;
+        }
+
+        .contact-form {
+            display: grid;
+            gap: 16px;
+            margin-top: 24px;
+            text-align: left;
+        }
+
+        .contact-form label {
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        .contact-input,
+        .contact-textarea {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid rgba(31, 48, 64, 0.12);
+            border-radius: 16px;
+            background: #f7fbff;
+            color: var(--text);
+            font-size: 1rem;
+            transition: border-color 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .contact-input:focus,
+        .contact-textarea:focus {
+            outline: none;
+            border-color: rgba(23, 162, 184, 0.8);
+            box-shadow: 0 0 0 5px rgba(23, 162, 184, 0.12);
+        }
+
+        .contact-textarea {
+            min-height: 160px;
+            resize: vertical;
+        }
+
+        .contact-button {
+            width: 100%;
+            padding: 14px 20px;
+            border-radius: 16px;
+            border: none;
+            background: linear-gradient(135deg, #17a2b8, #26c8e3);
+            color: white;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 18px 45px rgba(15, 23, 42, 0.12);
+            transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+        }
+
+        .contact-button:hover {
+            transform: translateY(-2px);
+            background: linear-gradient(135deg, #10a5c0, #1ca8c7);
+            box-shadow: 0 20px 55px rgba(15, 23, 42, 0.16);
+        }
+
+        .contact-card:hover,
+        .service-card:hover,
+        .project-list li:hover,
+        .skills .row > div:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 28px 85px rgba(15, 23, 42, 0.1);
+        }
+
+        .project-list li {
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .contact-card p strong {
+            color: var(--text);
         }
 
         footer {
-            background-color: #17a2b8;
+            background: #0f9bb2;
             color: white;
             text-align: center;
-            padding: 20px;
-            margin-top: 40px;
+            padding: 22px 0;
+            margin-top: 30px;
         }
 
         footer a {
-            color: white;
+            color: rgba(255, 255, 255, 0.92);
+            text-decoration: none;
+        }
+
+        footer a:hover {
             text-decoration: underline;
         }
 
-        .services .card img {
-            width: 100%;
-            /* S'adapte à la largeur du conteneur */
-            height: 250px;
-            /* Hauteur fixe pour toutes les images */
-            object-fit: cover;
-            /* Coupe ou redimensionne l'image pour remplir le cadre tout en conservant les proportions */
+        .fade-up {
+            opacity: 0;
+            animation: fadeInUp 0.9s ease forwards;
+        }
+
+        .fade-up:nth-child(1) {
+            animation-delay: 0.12s;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(18px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 60px 0 45px;
+            }
+
+            .section-card {
+                padding: 30px 20px;
+            }
+
+            .services .service-card {
+                min-height: auto;
+            }
+
+            .about img {
+                width: 200px;
+                height: 200px;
+            }
         }
     </style>
 </head>
@@ -120,50 +413,43 @@
 
     <!-- Header Section -->
     <header class="header">
-        <h1>Hello, I'm Mandranto</h1>
-        <p>Full-Stack Developer | Available for freelance work</p>
+        <h1 class="fade-up">Hello, I'm Mandranto</h1>
+        <p class="fade-up" style="animation-delay: 0.12s;">Full-Stack Developer | Available for freelance work</p>
     </header>
 
     <!-- About Section -->
     <section id="about" class="about">
-        <div class="container">
+        <div class="container section-card fade-up">
             <div class="row justify-content-center">
-                <div class="col-md-4 text-center">
-                    <img src="sary.jpg" alt="Profile Image">
+                <div class="col-md-5 text-center">
+                    <img class="profile-img" src="sary.jpg" alt="Profile Image">
                     <h3>Ratsiandavana Mandranto Fitahiana</h3>
-                    <p>Student at <a href="https://eni.mg/" target="_blank">ENI</a> - Curious, motivated, and passionate
-                        about modern technologies, always in continuous learning to develop innovative solutions.</p>
+                    <p>Student at <a href="https://eni.mg/" target="_blank">ENI</a> - Curious, motivated, and passionate about modern technologies, always in continuous learning to develop innovative solutions.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Skills Section -->
-    <section id="skills" class="skills bg-light">
-        <div class="container">
+    <section id="skills" class="skills">
+        <div class="container section-card fade-up">
             <h2>Skills</h2>
             <div class="row">
                 <div class="col-md-3">
                     <h4>Software Development</h4>
-                    <p>Proficient in building microservices architectures using JavaScript, Python, .NET, and Java, with
-                        a focus on scalability and maintainability.</p>
+                    <p>Proficient in building microservices architectures using JavaScript, Python, .NET, and Java, with a focus on scalability and maintainability.</p>
                 </div>
                 <div class="col-md-3">
                     <h4>Infrastructure Engineering</h4>
-                    <p>Experienced in cloud infrastructure on AWS, infrastructure as code with Terraform, and
-                        containerization technologies like Docker and Kubernetes, alongside knowledge of network
-                        protocols and architectures.</p>
+                    <p>Experienced in cloud infrastructure on AWS, infrastructure as code with Terraform, and containerization technologies like Docker and Kubernetes, alongside knowledge of network protocols and architectures.</p>
                 </div>
                 <div class="col-md-3">
                     <h4>Version Control & CI/CD Tools</h4>
-                    <p>Also experienced in using Git and GitHub for version control, with CI/CD pipeline automation
-                        using
-                        Jenkins and proficiency in Secure Shell (SSH) for secure remote administration.</p>
+                    <p>Also experienced in using Git and GitHub for version control, with CI/CD pipeline automation using Jenkins and proficiency in Secure Shell (SSH) for secure remote administration.</p>
                 </div>
                 <div class="col-md-3">
                     <h4>Operating Systems</h4>
-                    <p>Familiar with Debian-based Linux distributions and Windows operating systems, emphasizing system
-                        administration and optimization.</p>
+                    <p>Familiar with Debian-based Linux distributions and Windows operating systems, emphasizing system administration and optimization.</p>
                 </div>
             </div>
         </div>
@@ -171,55 +457,43 @@
 
 
     <!-- Projects Section -->
-    <section id="projects">
-        <div class="container">
+    <section id="projects" class="projects">
+        <div class="container section-card fade-up">
             <h2>Projects</h2>
-            <ul>
-                <li><strong>High Availability (HA) Database and Web Infrastructure:</strong> Engineered a
-                    high-availability setup on Ubuntu Server featuring a master-slave database architecture and
-                    load-balanced web servers. Configured replication and failover mechanisms to ensure continuous
-                    database synchronization and quick recovery in case of failure. The HA architecture maximizes uptime
-                    and reliability for both database and web services, enhancing fault tolerance and system resilience.
-                </li>
-                <li><strong>Microservices Deployment:</strong> Designed and implemented a microservices architecture for
-                    web, desktop, and mobile applications, using Docker containers for isolated, consistent deployments
-                    across platforms.</li>
-                <li><strong>Continuous Integration/Continuous Deployment (CI/CD):</strong> Set up a CI/CD pipeline with
-                    Jenkins to automate testing, integration, and deployment, reducing delivery time and enhancing code
-                    quality.</li>
-                <li><strong>Static Web Applications:</strong> Created and deployed static websites on GitHub Pages,
-                    focusing on front-end performance optimization and responsive design.</li>
-                <li><strong>Container Orchestration:</strong> Utilized Docker Compose and Kubernetes for container
-                    orchestration, enabling scalable, resilient application deployments with automated resource
-                    management.</li>
+            <ul class="project-list">
+                <li><strong>High Availability (HA) Database and Web Infrastructure:</strong> Engineered a high-availability setup on Ubuntu Server featuring a master-slave database architecture and load-balanced web servers. Configured replication and failover mechanisms to ensure continuous database synchronization and quick recovery in case of failure. The HA architecture maximizes uptime and reliability for both database and web services, enhancing fault tolerance and system resilience.</li>
+                <li><strong>Microservices Deployment:</strong> Designed and implemented a microservices architecture for web, desktop, and mobile applications, using Docker containers for isolated, consistent deployments across platforms.</li>
+                <li><strong>Continuous Integration/Continuous Deployment (CI/CD):</strong> Set up a CI/CD pipeline with Jenkins to automate testing, integration, and deployment, reducing delivery time and enhancing code quality.</li>
+                <li><strong>Static Web Applications:</strong> Created and deployed static websites on GitHub Pages, focusing on front-end performance optimization and responsive design.</li>
+                <li><strong>Container Orchestration:</strong> Utilized Docker Compose and Kubernetes for container orchestration, enabling scalable, resilient application deployments with automated resource management.</li>
                 <li><strong>Auto-Scalable Architecture on GKE/GCP:</strong> Set up an auto-scalable architecture on Google Kubernetes Engine (GKE) within Google Cloud Platform (GCP), allowing dynamic scaling of resources based on workload demands to ensure optimal performance and cost efficiency.</li>
             </ul>
         </div>
     </section>
     <!-- Services Section -->
-    <section id="services" class="services bg-light">
-        <div class="container">
+    <section id="services" class="services">
+        <div class="container section-card fade-up">
             <h2>Services</h2>
             <div class="row">
                 <div class="col-md-4">
-                    <div class="card">
-                        <img src="UIUX.png" alt="Mobile Apps" class="img-fluid mb-3">
+                    <div class="service-card">
+                        <img src="UIUX.png" alt="Frontend Development" class="img-fluid mb-3">
                         <h4>Frontend Development</h4>
                         <p>Building high-performing User Interface</p>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="card">
-                        <img src="microservice.jpeg" alt="Mobile Apps" class="img-fluid mb-3">
+                    <div class="service-card">
+                        <img src="microservice.jpeg" alt="Multi-platform App" class="img-fluid mb-3">
                         <h4>Multi-platform App</h4>
-                        <p>Developing Multi-platform and Microservice applications </p>
+                        <p>Developing Multi-platform and Microservice applications</p>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="card">
-                        <img src="CloudComputing.jpeg" alt="Mobile Apps" class="img-fluid mb-3">
+                    <div class="service-card">
+                        <img src="CloudComputing.jpeg" alt="Cloud Services" class="img-fluid mb-3">
                         <h4>Cloud Services</h4>
-                        <p>Deploying and managing services on AWS , GCP.</p>
+                        <p>Deploying and managing services on AWS, GCP.</p>
                     </div>
                 </div>
             </div>
@@ -227,16 +501,18 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact">
-        <div class="container">
+    <section id="contact" class="contact">
+        <div class="container section-card fade-up">
             <h2>Contact</h2>
-            <p class="text-center">Feel free to reach out for any freelance opportunities!</p>
-            <p class="text-center"><i class="fas fa-envelope"></i> Email: mandrantofit@gmail.com</p>
-            <p class="text-center"><i class="fab fa-whatsapp"></i> WhatsApp: +261 34 25 822 12</p>
-            <div class="text-center mt-4">
-                <a href="CV_2026-04-21_Mandranto Fitahiana_RATSIANDAVANA.pdf" class="btn btn-info" download>
-                    <i class="fas fa-download"></i> Download My CV
-                </a>
+            <div class="contact-card">
+                <p>Feel free to reach out for any freelance opportunities!</p>
+                <p><i class="fas fa-envelope"></i> Email: mandrantofit@gmail.com</p>
+                <p><i class="fab fa-whatsapp"></i> WhatsApp: +261 34 25 822 12</p>
+                <div class="mt-4">
+                    <a href="CV_2026-04-21_Mandranto Fitahiana_RATSIANDAVANA.pdf" class="btn btn-info" download>
+                        <i class="fas fa-download"></i> Download My CV
+                    </a>
+                </div>
             </div>
         </div>
     </section>
